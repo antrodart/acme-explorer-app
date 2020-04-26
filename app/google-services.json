@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "320287890669",
+    "firebase_url": "https://acme-explorer-app.firebaseio.com",
+    "project_id": "acme-explorer-app",
+    "storage_bucket": "acme-explorer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320287890669:android:00d0e0d215a67bba5ec0e4",
+        "android_client_info": {
+          "package_name": "us.master.acmeexplorer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320287890669-rlltda54sc79imq5rv04surprlqg47qm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3gJeHDwMR5811w2_ISMsqbMf2yeeseFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320287890669-rlltda54sc79imq5rv04surprlqg47qm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

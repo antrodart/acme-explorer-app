@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FilterTripActivity"></activity>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".FilterTripActivity" />
         <activity android:name=".TripDetailActivity" />
         <activity android:name=".SelectedTripActivity" />
         <activity android:name=".TripActivity" />
