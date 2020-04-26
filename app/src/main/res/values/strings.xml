@@ -5,4 +5,16 @@
     <string name="login_button_mail_text">Acceder</string>
     <string name="login_button_google_text">Acceder con Google</string>
     <string name="login_button_register_text">Registrarse</string>
+    <string name="login_mail_error_1">El correo electrónico no puede estar vacío</string>
+    <string name="login_mail_error_2">La contraseña no puede estar vacía</string>
+    <string name="login_mail_access_error">Se ha producido un error al acceder</string>
+    <string name="login_verified_mail_error">Aún no has validado tu cuenta. ¿Quieres que te enviemos de nuevo el correo de verificación?</string>
+    <string name="login_verified_mail_error_ok">Enviar correo</string>
+    <string name="login_verified_mail_error_sent">Hemos enviado un correo de verificación a tu dirección</string>
+    <string name="login_verified_mail_error_no_sent">No se ha podido enviar un correo de verificación a tu cuenta</string>
+    <string name="login_verified_mail_error_cancel">Cancelar</string>
+    <string name="login_google_play_services_error">Debes actualizar Google Play Services antes de continuar</string>
+    <string name="login_download_gps">Actualizar</string>
+    <string name="gps_download_url">market://details?id=com.google.android.gms</string>
+    <string name="market_download_url">https://play.google.com/store/apps/details?id=com.google.android.gms</string>
 </resources>
