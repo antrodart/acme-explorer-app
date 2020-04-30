@@ -9,4 +9,5 @@
     <color name="green_button">#8BC34A</color>
     <color name="green_app">#8BC34A</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="yellow_button">#FFEB3B</color>
 </resources>

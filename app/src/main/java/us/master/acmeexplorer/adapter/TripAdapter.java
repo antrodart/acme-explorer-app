@@ -45,8 +45,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
     @Override
     public void onBindViewHolder(@NonNull TripViewHolder tripViewHolder, int i) {
         final Trip trip = nTrips.get(i);
-        String startDate = Util.formateaFecha(trip.getStartDate());
-        String endDate = Util.formateaFecha(trip.getEndDate());
+        String startDate = Util.dateFormatSpanish(trip.getStartDate());
+        String endDate = Util.dateFormatSpanish(trip.getEndDate());
 
         tripViewHolder.city.setText(trip.getEndPLace());
         tripViewHolder.description.setText(trip.getDescription());

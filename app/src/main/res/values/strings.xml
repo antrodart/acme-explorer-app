@@ -30,4 +30,23 @@
     <string name="get_trip_database_error">Ha ocurrido un error al intentar recuperar el viaje</string>
     <string name="get_user_database_error">Ha habido un error al intentar obtener su usuario. Inténtelo de nuevo más tarde y disculpe las molestias.</string>
     <string name="greetings_user">Hola, %1$s</string>
+    <string name="user_detail_title">Mi perfil</string>
+    <string name="user_detail_picture_desc">Imagen de perfil del usuario</string>
+    <string name="user_detail_city_desc">Ciudad:</string>
+    <string name="user_detail_birthdate_desc">Fecha de nacimiento:</string>
+    <string name="user_detail_email_desc">Email:</string>
+    <string name="Edit_user_button">Editar perfil</string>
+    <string name="error_load_user_profile">No se ha podido cargar la información del usuario, disculpe las molestias.</string>
+    <string name="my_profile">Mi perfil</string>
+    <string name="user_edit_name_hint">Nombre</string>
+    <string name="user_edit_surname_hint">Apellidos</string>
+    <string name="user_edit_email_hint">Correo electrónico</string>
+    <string name="user_edit_city_hint">Ciudad</string>
+    <string name="user_edit_picture_hint">Enlace de foto de perfil</string>
+    <string name="user_edit_birthdate_tv">F. nacimiento:</string>
+    <string name="user_edit_birthdate_image_desc">Clica aquí para modificar la fecha de nacimiento</string>
+    <string name="user_edit_save">Guardar</string>
+    <string name="user_edit_name_error">El nombre no es válido</string>
+    <string name="user_edit_surname_error">Debe indicar al menos un apellido</string>
+    <string name="user_edit_city_error">Debe indicar una ciudad</string>
 </resources>

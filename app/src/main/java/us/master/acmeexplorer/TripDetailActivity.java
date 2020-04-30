@@ -1,7 +1,5 @@
 package us.master.acmeexplorer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -65,8 +65,8 @@ public class TripDetailActivity extends AppCompatActivity  {
                 detail_trip_description.setText(trip.getDescription());
                 city_textview_detail.setText(trip.getEndPLace());
                 price_textview_detail.setText(trip.getPrice().toString()+"€");
-                startdate_textview_detail.setText(Util.formateaFecha(trip.getStartDate()));
-                enddate_textview_detail.setText(Util.formateaFecha(trip.getEndDate()));
+                startdate_textview_detail.setText(Util.dateFormatSpanish(trip.getStartDate()));
+                enddate_textview_detail.setText(Util.dateFormatSpanish(trip.getEndDate()));
                 exit_place_textview_detail.setText(trip.getStartPlace());
                 if(!trip.getUrl().isEmpty()) {
                     Picasso.get()
