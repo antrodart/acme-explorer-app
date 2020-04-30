@@ -4,7 +4,7 @@
     <string name="login_pass_et_hint">Contraseña</string>
     <string name="login_button_mail_text">Acceder</string>
     <string name="login_button_google_text">Acceder con Google</string>
-    <string name="login_button_register_text">Registrarse</string>
+    <string name="login_button_register_text">¿No tienes cuenta? Regístrate</string>
     <string name="login_mail_error_1">El correo electrónico no puede estar vacío</string>
     <string name="login_mail_error_2">La contraseña no puede estar vacía</string>
     <string name="login_mail_access_error">Se ha producido un error al acceder</string>
@@ -17,4 +17,17 @@
     <string name="login_download_gps">Actualizar</string>
     <string name="gps_download_url">market://details?id=com.google.android.gms</string>
     <string name="market_download_url">https://play.google.com/store/apps/details?id=com.google.android.gms</string>
+    <string name="default_client_id">320287890669-rlltda54sc79imq5rv04surprlqg47qm.apps.googleusercontent.com</string>
+    <string name="login_completed">El usuario %1$s ha accedido correctamente</string>
+    <string name="login_pass_confirmation_et_hint">Introducir de nuevo la contraseña</string>
+    <string name="login_button_signup_text">Registrar usuario</string>
+    <string name="signup_error_user">La dirección de correo no es válida</string>
+    <string name="signup_error_pass">La contraseña no es válida</string>
+    <string name="signup_error_pass_not_match">Las contraseñas no coinciden</string>
+    <string name="signup_created">El usuario se ha registrado correctamente</string>
+    <string name="signup_create_error">Se ha producido un error al registrar el usuario</string>
+    <string name="signup_create_error_email_in_use">La dirección de correo ya está en uso</string>
+    <string name="get_trip_database_error">Ha ocurrido un error al intentar recuperar el viaje</string>
+    <string name="get_user_database_error">Ha habido un error al intentar obtener su usuario. Inténtelo de nuevo más tarde y disculpe las molestias.</string>
+    <string name="greetings_user">Hola, %1$s</string>
 </resources>

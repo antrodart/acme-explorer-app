@@ -64,7 +64,7 @@ public class TripDetailActivity extends AppCompatActivity  {
                 detail_trip_city.setText(trip.getEndPLace());
                 detail_trip_description.setText(trip.getDescription());
                 city_textview_detail.setText(trip.getEndPLace());
-                price_textview_detail.setText(trip.getPrice()+"€");
+                price_textview_detail.setText(trip.getPrice().toString()+"€");
                 startdate_textview_detail.setText(Util.formateaFecha(trip.getStartDate()));
                 enddate_textview_detail.setText(Util.formateaFecha(trip.getEndDate()));
                 exit_place_textview_detail.setText(trip.getStartPlace());
@@ -81,7 +81,7 @@ public class TripDetailActivity extends AppCompatActivity  {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     trip.setSelected(isChecked);
-                    Constants.TRIPS.get(trip.getId()-1).setSelected(isChecked);
+                    Constants.TRIPS.get((trip.getId()).intValue()-1).setSelected(isChecked);
                 }
             });
 

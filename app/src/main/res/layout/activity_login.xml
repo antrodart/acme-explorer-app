@@ -9,22 +9,15 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:id="@+id/login_progress"
-        style="@android:style/Widget.ProgressBar.Large"/>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/brujula"
         android:contentDescription="@string/app_name"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/login_main_layout">
 
         <LinearLayout
@@ -93,11 +86,18 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/login_button_register"
                 android:textAllCaps="true"
-                android:backgroundTint="@color/transparent"
                 android:text="@string/login_button_register_text"
-                android:textColor="@color/green_app"/>
+                android:textColor="@color/green_app"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/login_progress"
+        style="@android:style/Widget.Material.ProgressBar.Large"/>
 </LinearLayout>

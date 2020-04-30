@@ -8,20 +8,24 @@ import java.util.Objects;
 import java.util.Random;
 
 import us.master.acmeexplorer.Constants;
+import us.master.acmeexplorer.dto.TripDTO;
 
 public class Trip implements Serializable {
 
-    private int id;
+    private Long id;
     private String startPlace;
     private String endPLace;
     private String description;
     private String url;
     private Calendar startDate;
     private Calendar endDate;
-    private int price;
+    private Long price;
     private boolean selected;
 
-    private Trip(int id, String startPlace, String endPLace, String description, String url, Calendar startDate, Calendar endDate, int price) {
+    public Trip() {
+    }
+
+    public Trip(Long id, String startPlace, String endPLace, String description, String url, Calendar startDate, Calendar endDate, Long price) {
         this.id = id;
         this.startPlace = startPlace;
         this.endPLace = endPLace;
@@ -33,11 +37,29 @@ public class Trip implements Serializable {
         this.selected = false;
     }
 
-    public int getId() {
+    public Trip (TripDTO tripDTO) {
+        this.id = tripDTO.getId();
+        this.startPlace = tripDTO.getStartPlace();
+        this.endPLace = tripDTO.getEndPlace();
+        this.description = tripDTO.getDescription();
+        this.url = tripDTO.getUrl();
+        this.price = tripDTO.getPrice();
+        this.selected = tripDTO.getSelected();
+        String[] startDateDTOarray = tripDTO.getStartDate().split("-");
+        String[] endDateDTOarray = tripDTO.getStartDate().split("-");
+        Calendar startDateDTO = Calendar.getInstance();
+        Calendar endDateDTO = Calendar.getInstance();
+        startDateDTO.set(Integer.parseInt(startDateDTOarray[0]),Integer.parseInt(startDateDTOarray[1]),Integer.parseInt(startDateDTOarray[2]));
+        endDateDTO.set(Integer.parseInt(endDateDTOarray[0]),Integer.parseInt(endDateDTOarray[1]),Integer.parseInt(endDateDTOarray[2]));
+        this.startDate = startDateDTO;
+        this.endDate = endDateDTO;
+        }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,11 +111,11 @@ public class Trip implements Serializable {
         this.endDate = endDate;
     }
 
-    public int getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -124,7 +146,7 @@ public class Trip implements Serializable {
             endDateRandom.set(2020,randomMonth, randomDaysOfMonth);
             endDateRandom.add(Calendar.DATE,randomPlusDays);
 
-            trips.add(new Trip(i+1,
+            trips.add(new Trip((long) (i + 1),
                     Constants.lugarSalida[startCityIndex],
                     Constants.ciudades[cityIndex],
                     Constants.adjetivo[r.nextInt(Constants.adjetivo.length)] + " viaje a "
@@ -132,7 +154,7 @@ public class Trip implements Serializable {
                     Constants.urlImagenes[r.nextInt(Constants.urlImagenes.length)],
                     startDateRandom,
                     endDateRandom,
-                    r.nextInt(850) + 150));
+                    (long) (r.nextInt(850) + 150)));
         }
 
         return trips;
@@ -143,19 +165,34 @@ public class Trip implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return id == trip.id &&
-                price == trip.price &&
-                selected == trip.selected &&
+        return selected == trip.selected &&
+                Objects.equals(id, trip.id) &&
                 Objects.equals(startPlace, trip.startPlace) &&
                 Objects.equals(endPLace, trip.endPLace) &&
-                Objects.equals(description, trip.description) &&
-                Objects.equals(url, trip.url) &&
+                description.equals(trip.description) &&
+                url.equals(trip.url) &&
                 Objects.equals(startDate, trip.startDate) &&
-                Objects.equals(endDate, trip.endDate);
+                Objects.equals(endDate, trip.endDate) &&
+                Objects.equals(price, trip.price);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, startPlace, endPLace, description, url, startDate, endDate, price, selected);
+    }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "id=" + id +
+                ", startPlace='" + startPlace + '\'' +
+                ", endPLace='" + endPLace + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", startDate=" + startDate.get(Calendar.DAY_OF_MONTH) + "/" +  startDate.get(Calendar.MONTH) + "/" + startDate.get(Calendar.YEAR) +
+                ", endDate=" + endDate.get(Calendar.DAY_OF_MONTH) + "/" +  endDate.get(Calendar.MONTH) + "/" + endDate.get(Calendar.YEAR) +
+                ", price=" + price +
+                ", selected=" + selected +
+                '}';
     }
 }
