@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.simpleListView);
         greetingsTextView = findViewById(R.id.greetings_user);
 
-        user = (User) getIntent().getSerializableExtra(USER_PRINCIPAL);
+        user = getIntent().getParcelableExtra(USER_PRINCIPAL);
 
         String greetingsMessage = "Hola, usuario";
         if(user != null && user.getName() != null && !user.getName().equals("")) {

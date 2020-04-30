@@ -42,4 +42,8 @@ public class Util {
         return  res;
     }
 
+    private boolean checkStringEmpty(String string) {
+        return string == null || string.equals("");
+    }
+
 }

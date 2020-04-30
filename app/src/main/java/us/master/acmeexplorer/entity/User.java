@@ -1,13 +1,16 @@
 package us.master.acmeexplorer.entity;
 
-import com.google.firebase.auth.FirebaseUser;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
+import com.google.firebase.auth.FirebaseUser;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import us.master.acmeexplorer.dto.UserDTO;
 
-public class User implements Serializable {
+public class User implements Parcelable {
     private String id;
     private String name;
     private String surname;
@@ -94,5 +97,55 @@ public class User implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // write your object's data to the passed-in Parcel
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(id);
+        out.writeString(name);
+        out.writeString(surname);
+        out.writeString(email);
+        out.writeString(city);
+        if (birthDate == null) {
+            out.writeLong(1L);
+            out.writeString( "");
+        } else {
+            out.writeLong(birthDate.getTimeInMillis());
+            out.writeString(birthDate.getTimeZone().getID());
+        }
+        out.writeString(picture);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private User(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        surname = in.readString();
+        email = in.readString();
+        city = in.readString();
+        long birthdateMiliseconds = in.readLong();
+        String birthdateTimezone = in.readString();
+        picture = in.readString();
+        if (birthdateMiliseconds != 1L) {
+            birthDate = new GregorianCalendar(TimeZone.getTimeZone(birthdateTimezone));
+            birthDate.setTimeInMillis(birthdateMiliseconds);
+        }
     }
 }
