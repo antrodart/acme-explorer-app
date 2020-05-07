@@ -1,34 +1,34 @@
 
+€	java:S116"_Rename this field "selected_trip_switch" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­³ëÛşÿÿÿÿ8¥ÄÀÒ•.
 u
 java:S1450!"XRemove the "buyButton" field and declare it as a local variable in the relevant methods.(ô¼Ş8Éå·›.
+†
+java:S1450"iRemove the "exit_place_textview_detail" field and declare it as a local variable in the relevant methods.(°é¹8ìãÈÒ•.
+
+java:S1450"_Remove the "detail_trip_city" field and declare it as a local variable in the relevant methods.(ÑÁÌ‘ùÿÿÿÿ8 ‰ÂÒ•.
+|
+java:S1450 "_Remove the "showSelectSwitch" field and declare it as a local variable in the relevant methods.(Û¿ÿ¸8ß‹Ñ –.
+…	java:S116"dRename this field "startdate_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßñ±öùÿÿÿÿ8Æá¾Ò•.
+ˆ
+java:S1450"fRemove the "enddate_textview_detail" field and declare it as a local variable in the relevant methods.(åçÌƒøÿÿÿÿ8÷¯ÇÒ•.
+†
+java:S1450"dRemove the "price_textview_detail" field and declare it as a local variable in the relevant methods.(§‚ı¯ùÿÿÿÿ8÷¯ÇÒ•.
 €
 java:S1450"cRemove the "city_textview_detail" field and declare it as a local variable in the relevant methods.(ŸĞ¥Ø8‚¼ÅÒ•.
+Š
+java:S1450"hRemove the "startdate_textview_detail" field and declare it as a local variable in the relevant methods.(ßñ±öùÿÿÿÿ8÷¯ÇÒ•.
+ƒ	java:S116"bRename this field "detail_trip_description" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¾ï¶ûÿÿÿÿ8œü¼Ò•.
+{	java:S116"_Rename this field "city_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸĞ¥Ø8äË½Ò•.
+ƒ	java:S116"bRename this field "enddate_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åçÌƒøÿÿÿÿ8œ«¿Ò•.
+	java:S116"eRename this field "exit_place_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°é¹8›î¿Ò•.
+|	java:S116"[Rename this field "detail_trip_city" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÑÁÌ‘ùÿÿÿÿ8œü¼Ò•.
+„
+java:S1450"bRemove the "detail_trip_picture" field and declare it as a local variable in the relevant methods.(Ôõ¶Äúÿÿÿÿ8‰úÃÒ•.
+	java:S116"`Rename this field "price_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§‚ı¯ùÿÿÿÿ8ı—¾Ò•.
+ˆ
+java:S1450"fRemove the "detail_trip_description" field and declare it as a local variable in the relevant methods.(ª¾ï¶ûÿÿÿÿ8‰úÃÒ•.
+S
+java:S2696)"6Make the enclosing method "static" or remove this set.(àíÃú8¥÷¥·›.
 	java:S116"^Rename this field "detail_trip_picture" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ôõ¶Äúÿÿÿÿ8œü¼Ò•.
 …
 java:S1450"cRemove the "selected_trip_switch" field and declare it as a local variable in the relevant methods.(­³ëÛşÿÿÿÿ8ìãÈÒ•.
-ˆ
-java:S1450"fRemove the "enddate_textview_detail" field and declare it as a local variable in the relevant methods.(åçÌƒøÿÿÿÿ8÷¯ÇÒ•.
-…	java:S116"dRename this field "startdate_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßñ±öùÿÿÿÿ8Æá¾Ò•.
-	java:S116"eRename this field "exit_place_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°é¹8›î¿Ò•.
-ˆ
-java:S1450"fRemove the "detail_trip_description" field and declare it as a local variable in the relevant methods.(ª¾ï¶ûÿÿÿÿ8‰úÃÒ•.
-„
-java:S1450"bRemove the "detail_trip_picture" field and declare it as a local variable in the relevant methods.(Ôõ¶Äúÿÿÿÿ8‰úÃÒ•.
-ƒ	java:S116"bRename this field "enddate_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åçÌƒøÿÿÿÿ8œ«¿Ò•.
-€	java:S116"_Rename this field "selected_trip_switch" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­³ëÛşÿÿÿÿ8¥ÄÀÒ•.
-ƒ	java:S116"bRename this field "detail_trip_description" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¾ï¶ûÿÿÿÿ8œü¼Ò•.
-†
-java:S1450"dRemove the "price_textview_detail" field and declare it as a local variable in the relevant methods.(§‚ı¯ùÿÿÿÿ8÷¯ÇÒ•.
-†
-java:S1450"iRemove the "exit_place_textview_detail" field and declare it as a local variable in the relevant methods.(°é¹8ìãÈÒ•.
-|
-java:S1450 "_Remove the "showSelectSwitch" field and declare it as a local variable in the relevant methods.(Û¿ÿ¸8ß‹Ñ –.
-Š
-java:S1450"hRemove the "startdate_textview_detail" field and declare it as a local variable in the relevant methods.(ßñ±öùÿÿÿÿ8÷¯ÇÒ•.
-|	java:S116"[Rename this field "detail_trip_city" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÑÁÌ‘ùÿÿÿÿ8œü¼Ò•.
-{	java:S116"_Rename this field "city_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸĞ¥Ø8äË½Ò•.
-
-java:S1450"_Remove the "detail_trip_city" field and declare it as a local variable in the relevant methods.(ÑÁÌ‘ùÿÿÿÿ8 ‰ÂÒ•.
-	java:S116"`Rename this field "price_textview_detail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§‚ı¯ùÿÿÿÿ8ı—¾Ò•.
-S
-java:S2696)"6Make the enclosing method "static" or remove this set.(àíÃú8¥÷¥·›.

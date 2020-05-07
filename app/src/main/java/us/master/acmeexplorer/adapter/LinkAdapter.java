@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.cardview.widget.CardView;
+
 import java.util.List;
+
+import us.master.acmeexplorer.Constants;
 import us.master.acmeexplorer.R;
 import us.master.acmeexplorer.entity.Link;
 
@@ -55,6 +59,7 @@ public class LinkAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, link.getIntentClass());
+                intent.putExtra(Constants.USER_PRINCIPAL, link.getUserExtra());
                 context.startActivity(intent);
             }
         });

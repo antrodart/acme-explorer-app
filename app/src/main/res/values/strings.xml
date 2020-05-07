@@ -49,4 +49,21 @@
     <string name="user_edit_name_error">El nombre no es válido</string>
     <string name="user_edit_surname_error">Debe indicar al menos un apellido</string>
     <string name="user_edit_city_error">Debe indicar una ciudad</string>
+    <string name="create_new_trip">Crear viaje</string>
+    <string name="my_created_trips">Mis viajes creados</string>
+    <string name="trip_create_startPlace">Lugar de salida</string>
+    <string name="trip_create_endPlace">Lugar de llegada</string>
+    <string name="trip_create_description">Descripción del viaje</string>
+    <string name="trip_create_price">Precio (€)</string>
+    <string name="trip_create_picture">Enlace a imagen</string>
+    <string name="trip_create_startDate">Fecha de salida:</string>
+    <string name="trip_create_startDate_desc">Clica aquí para modificar la fecha de salida</string>
+    <string name="trip_create_endDate_desc">Clica aquí para modificar la fecha de llegada</string>
+    <string name="trip_create_endDate">Fecha de llegada:</string>
+    <string name="trip_create_save">Crear viaje</string>
+    <string name="trip_create_place_error">El lugar no es válido</string>
+    <string name="trip_create_description_error">La descripción no es válida</string>
+    <string name="trip_create_price_error">El precio no es válido</string>
+    <string name="trip_create_dates_error">La fecha de salida no puede ser posterior a la de llegada</string>
+    <string name="trip_create_dates_error_2">La salida no puede ser una fecha pasada</string>
 </resources>

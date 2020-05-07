@@ -42,7 +42,7 @@ public class UserEditActivity extends AppCompatActivity {
 
         FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
 
-        user = getIntent().getParcelableExtra(UserDetailActivity.USER_PRINCIPAL);
+        user = getIntent().getParcelableExtra(Constants.USER_PRINCIPAL);
         user_edit_name_tv = findViewById(R.id.user_edit_name_tv);
         user_edit_surname_tv = findViewById(R.id.user_edit_surname_tv);
         user_edit_email_tv = findViewById(R.id.user_edit_email_tv);
@@ -63,7 +63,7 @@ public class UserEditActivity extends AppCompatActivity {
         fillFieldsWithUserData();
 
         user_edit_save_button.setOnClickListener(v -> {
-            if (!existErrorinFields()) {
+            if (!existErrorInFields()) {
                 progressBar.setVisibility(View.VISIBLE);
                 updateUser();
                 firebaseDatabaseService.saveUser(user, ((databaseError, databaseReference) -> {
@@ -107,7 +107,7 @@ public class UserEditActivity extends AppCompatActivity {
         user.setBirthDate(birthDatePicked);
     }
 
-    public boolean existErrorinFields() {
+    public boolean existErrorInFields() {
         boolean result = false;
 
         if (user_edit_name_tv.getText().toString().isEmpty()) {

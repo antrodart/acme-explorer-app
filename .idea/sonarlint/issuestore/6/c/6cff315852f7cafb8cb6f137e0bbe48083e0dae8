@@ -1,4 +1,6 @@
 
-]	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(×“­ž8Ô†å×•.
+K
+java:S1948")Make "creator" transient or serializable.(×šòèÿÿÿÿÿ8åß…ûœ.
 <
-java:S2119„"Save and re-use this "Random".(¡Å”¦8å¢™…•.
+java:S2119"Save and re-use this "Random".(¡Å”¦8×Î‡ûœ.
+]	java:S107"AConstructor has 9 parameters, which is greater than 7 authorized.(õŽ¥Þ8Ô†å×•.

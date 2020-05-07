@@ -16,20 +16,25 @@ public class TripDTO {
     private String endDate;
     private Long price;
     private Boolean selected;
+    private String creator;
 
     public TripDTO() {
     }
 
-    public TripDTO (Trip trip) {
+    public TripDTO(Trip trip) {
         this.id = trip.getId();
         this.startPlace = trip.getStartPlace();
-        this.endPlace = trip.getEndPLace();
+        this.endPlace = trip.getEndPlace();
         this.description = trip.getDescription();
         this.url = trip.getUrl();
         this.price = trip.getPrice();
         this.selected = trip.isSelected();
         this.startDate = trip.getStartDate().get(Calendar.YEAR) + "-" + trip.getStartDate().get(Calendar.MONTH) + "-" + trip.getStartDate().get(Calendar.DAY_OF_MONTH);
         this.endDate = trip.getEndDate().get(Calendar.YEAR) + "-" + trip.getEndDate().get(Calendar.MONTH) + "-" + trip.getEndDate().get(Calendar.DAY_OF_MONTH);
+        if (trip.getCreator() != null) {
+            this.creator = trip.getCreator().getId();
+        }
+
     }
 
     public Long getId() {
@@ -102,6 +107,14 @@ public class TripDTO {
 
     public void setSelected(Boolean selected) {
         this.selected = selected;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     @Override

@@ -1,15 +1,15 @@
 
-S
-java:S2696/"6Make the enclosing method "static" or remove this set.(ÂôğÜ8‡§Ù•.
+\
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Å³¨8›£µ –.
+N
+java:S1172‡"+Remove this unused method parameter "view".(Øï•Ÿøÿÿÿÿ8Şï‚–.
+~
+java:S1450"\Remove the "switchColumns" field and declare it as a local variable in the relevant methods.(Éİê®ùÿÿÿÿ8œÍÙÓ•.
+X	java:S125)"<This block of commented-out lines of code should be removed.(—Šö’8‡§Ù•.
+Q
+java:S1066R"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8£Ğúœ–.
 J
 java:S1068"(Remove this unused "star" private field.(ˆ€ñúıÿÿÿÿ8‡§Ù•.
 X	java:S125‹"<This block of commented-out lines of code should be removed.(¼‰8¥†øœ–.
-N
-java:S1172‡"+Remove this unused method parameter "view".(Øï•Ÿøÿÿÿÿ8Şï‚–.
-\
-java:S1155">Use isEmpty() to check whether the collection is empty or not.(Å³¨8›£µ –.
-Q
-java:S1066R"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8£Ğúœ–.
-X	java:S125)"<This block of commented-out lines of code should be removed.(—Šö’8‡§Ù•.
-~
-java:S1450"\Remove the "switchColumns" field and declare it as a local variable in the relevant methods.(Éİê®ùÿÿÿÿ8œÍÙÓ•.
+S
+java:S2696/"6Make the enclosing method "static" or remove this set.(ÂôğÜ8‡§Ù•.

@@ -14,33 +14,36 @@ public class Trip implements Serializable {
 
     private Long id;
     private String startPlace;
-    private String endPLace;
+    private String endPlace;
     private String description;
     private String url;
     private Calendar startDate;
     private Calendar endDate;
     private Long price;
     private boolean selected;
+    private User creator;
 
     public Trip() {
     }
 
-    public Trip(Long id, String startPlace, String endPLace, String description, String url, Calendar startDate, Calendar endDate, Long price) {
+    public Trip(Long id, String startPlace, String endPlace, String description, String url,
+                Calendar startDate, Calendar endDate, Long price, User creator) {
         this.id = id;
         this.startPlace = startPlace;
-        this.endPLace = endPLace;
+        this.endPlace = endPlace;
         this.description = description;
         this.url = url;
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
         this.selected = false;
+        this.creator = creator;
     }
 
     public Trip (TripDTO tripDTO) {
         this.id = tripDTO.getId();
         this.startPlace = tripDTO.getStartPlace();
-        this.endPLace = tripDTO.getEndPlace();
+        this.endPlace = tripDTO.getEndPlace();
         this.description = tripDTO.getDescription();
         this.url = tripDTO.getUrl();
         this.price = tripDTO.getPrice();
@@ -71,12 +74,41 @@ public class Trip implements Serializable {
         this.startPlace = startPlace;
     }
 
-    public String getEndPLace() {
-        return endPLace;
+    public static List<Trip> generateTrips(int max) {
+        ArrayList<Trip> trips = new ArrayList<>(max);
+        Random r = new Random();
+
+        for (int i = 0; i < max; i++) {
+            // Se crean los índices aleatorios de las listas de ciudades
+            int cityIndex = r.nextInt(Constants.ciudades.length);
+            int startCityIndex = r.nextInt(Constants.lugarSalida.length);
+            // La fecha final será igual a la inicial más un número aleatorio de días, hasta 14.
+            int randomMonth = r.nextInt(9) + 4;
+            int randomDaysOfMonth = r.nextInt(30) + 1;
+            int randomPlusDays = r.nextInt(14);
+            Calendar startDateRandom = Calendar.getInstance();
+            Calendar endDateRandom = Calendar.getInstance();
+
+            startDateRandom.set(2020, randomMonth, randomDaysOfMonth);
+            endDateRandom.set(2020, randomMonth, randomDaysOfMonth);
+            endDateRandom.add(Calendar.DATE, randomPlusDays);
+
+            trips.add(new Trip((long) (i + 1),
+                    Constants.lugarSalida[startCityIndex],
+                    Constants.ciudades[cityIndex],
+                    Constants.adjetivo[r.nextInt(Constants.adjetivo.length)] + " viaje a "
+                            + Constants.ciudades[cityIndex] + " desde " + Constants.lugarSalida[startCityIndex],
+                    Constants.urlImagenes[r.nextInt(Constants.urlImagenes.length)],
+                    startDateRandom,
+                    endDateRandom,
+                    (long) (r.nextInt(850) + 150), null));
+        }
+
+        return trips;
     }
 
-    public void setEndPLace(String endPLace) {
-        this.endPLace = endPLace;
+    public String getEndPlace() {
+        return endPlace;
     }
 
     public String getDescription() {
@@ -127,37 +159,16 @@ public class Trip implements Serializable {
         this.selected = selected;
     }
 
-    public static List<Trip> generateTrips(int max){
-        ArrayList<Trip> trips = new ArrayList<>(max);
-        Random r = new Random();
+    public void setEndPlace(String endPlace) {
+        this.endPlace = endPlace;
+    }
 
-        for (int i = 0; i < max; i++){
-            // Se crean los índices aleatorios de las listas de ciudades
-            int cityIndex = r.nextInt(Constants.ciudades.length);
-            int startCityIndex = r.nextInt(Constants.lugarSalida.length);
-            // La fecha final será igual a la inicial más un número aleatorio de días, hasta 14.
-            int randomMonth = r.nextInt(9)+4;
-            int randomDaysOfMonth = r.nextInt(30)+1;
-            int randomPlusDays = r.nextInt(14);
-            Calendar startDateRandom = Calendar.getInstance();
-            Calendar endDateRandom = Calendar.getInstance();
+    public User getCreator() {
+        return creator;
+    }
 
-            startDateRandom.set(2020,randomMonth, randomDaysOfMonth);
-            endDateRandom.set(2020,randomMonth, randomDaysOfMonth);
-            endDateRandom.add(Calendar.DATE,randomPlusDays);
-
-            trips.add(new Trip((long) (i + 1),
-                    Constants.lugarSalida[startCityIndex],
-                    Constants.ciudades[cityIndex],
-                    Constants.adjetivo[r.nextInt(Constants.adjetivo.length)] + " viaje a "
-                            + Constants.ciudades[cityIndex] + " desde " + Constants.lugarSalida[startCityIndex],
-                    Constants.urlImagenes[r.nextInt(Constants.urlImagenes.length)],
-                    startDateRandom,
-                    endDateRandom,
-                    (long) (r.nextInt(850) + 150)));
-        }
-
-        return trips;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     @Override
@@ -168,7 +179,7 @@ public class Trip implements Serializable {
         return selected == trip.selected &&
                 Objects.equals(id, trip.id) &&
                 Objects.equals(startPlace, trip.startPlace) &&
-                Objects.equals(endPLace, trip.endPLace) &&
+                Objects.equals(endPlace, trip.endPlace) &&
                 description.equals(trip.description) &&
                 url.equals(trip.url) &&
                 Objects.equals(startDate, trip.startDate) &&
@@ -178,7 +189,7 @@ public class Trip implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startPlace, endPLace, description, url, startDate, endDate, price, selected);
+        return Objects.hash(id, startPlace, endPlace, description, url, startDate, endDate, price, selected);
     }
 
     @Override
@@ -186,7 +197,7 @@ public class Trip implements Serializable {
         return "Trip{" +
                 "id=" + id +
                 ", startPlace='" + startPlace + '\'' +
-                ", endPLace='" + endPLace + '\'' +
+                ", endPLace='" + endPlace + '\'' +
                 ", description='" + description + '\'' +
                 ", url='" + url + '\'' +
                 ", startDate=" + startDate.get(Calendar.DAY_OF_MONTH) + "/" +  startDate.get(Calendar.MONTH) + "/" + startDate.get(Calendar.YEAR) +

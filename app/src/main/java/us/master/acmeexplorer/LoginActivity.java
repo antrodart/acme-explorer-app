@@ -280,7 +280,7 @@ public class LoginActivity extends AppCompatActivity {
         //Dummy
         Toast.makeText(this, String.format(getString(R.string.login_completed), user.getEmail()), Toast.LENGTH_LONG).show();
 
-        FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
+
 
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();

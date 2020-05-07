@@ -1,11 +1,11 @@
 package us.master.acmeexplorer;
 
+import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class SelectedTripActivity extends AppCompatActivity {
             }
         }
 
-        recyclerView = findViewById(R.id.recyckerView_selected_trip);
+        recyclerView = findViewById(R.id.recyclerView_selected_trip);
         tripAdapter = new TripAdapter(selectedTrips, this, false);
 
         gridLayoutManager = new GridLayoutManager(this, 1);

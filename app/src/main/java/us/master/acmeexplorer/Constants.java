@@ -25,7 +25,7 @@ public class Constants {
             "https://png.pngtree.com/element_pic/00/00/00/0056a3602a2cf41.jpg",
             "https://png.pngtree.com/element_our/sm/20180416/sm_5ad452dbaaf09.png"};
     public static List<Trip> TRIPS = null;
-
+    public final static String DEFAULT_TRIP_PICTURE = "https://www.ruizre.es/wp-content/uploads/2018/07/1524624771669.jpg";
 
     public static final String IntentViaje ="Viaje" ;
 
@@ -38,4 +38,11 @@ public class Constants {
     public final static String fechaFin = "FechaFin";
     public final static String maxPrice = "MaxPrice";
     public final static String minPrice = "MinPrice";
+
+
+    /**
+     * --------------------------- INTENT EXTRA CONSTANTS ------------------------------------------
+     */
+
+    public final static String USER_PRINCIPAL = "userPrincipal";
 }

@@ -48,7 +48,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
         String startDate = Util.dateFormatSpanish(trip.getStartDate());
         String endDate = Util.dateFormatSpanish(trip.getEndDate());
 
-        tripViewHolder.city.setText(trip.getEndPLace());
+        tripViewHolder.city.setText(trip.getEndPlace());
         tripViewHolder.description.setText(trip.getDescription());
         tripViewHolder.startDate.setText(startDate);
         tripViewHolder.endDate.setText(endDate);

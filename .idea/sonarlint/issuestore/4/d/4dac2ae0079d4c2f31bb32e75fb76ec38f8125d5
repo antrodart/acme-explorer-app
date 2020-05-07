@@ -1,9 +1,9 @@
 
+W
+java:S1118":Add a private constructor to hide the implicit public one.(×¼­Æ8ÏãíÒœ.
 9
-java:S1116$"Remove this empty statement.(–ø¨Í8•Ž»™–.
+java:S1116"Remove this empty statement.(¯ °¡8•Ž»™–.
 9
-java:S1116&"Remove this empty statement.(¯ °¡8•Ž»™–.
+java:S1116"Remove this empty statement.(–ø¨Í8•Ž»™–.
 9
-java:S1116%"Remove this empty statement.(íæý—8•Ž»™–.
-P
-java:S1118":Add a private constructor to hide the implicit public one.(×¼­Æ
+java:S1116"Remove this empty statement.(íæý—8•Ž»™–.

@@ -45,7 +45,7 @@ public class FirebaseDatabaseService {
 
     public void saveTrip(Trip trip, DatabaseReference.CompletionListener completionListener) {
         TripDTO tripDTO = new TripDTO(trip);
-        mDatabase.getReference("user/u123/trip").push().setValue(tripDTO, completionListener);
+        mDatabase.getReference("trips").push().setValue(tripDTO, completionListener);
     }
 
     public void saveUser(User user, DatabaseReference.CompletionListener completionListener) {
@@ -55,6 +55,10 @@ public class FirebaseDatabaseService {
 
     public DatabaseReference getUser(String userId) {
         return mDatabase.getReference("user/" + userId).getRef();
+    }
+
+    public DatabaseReference getTripsFromCreator(String creatorId) {
+        return mDatabase.getReference("trips").orderByChild("creator").equalTo(creatorId).getRef();
     }
 
 }

@@ -61,9 +61,9 @@ public class TripDetailActivity extends AppCompatActivity  {
                 }else {
                     selected_trip_switch.setVisibility(View.GONE);
                 }
-                detail_trip_city.setText(trip.getEndPLace());
+                detail_trip_city.setText(trip.getEndPlace());
                 detail_trip_description.setText(trip.getDescription());
-                city_textview_detail.setText(trip.getEndPLace());
+                city_textview_detail.setText(trip.getEndPlace());
                 price_textview_detail.setText(trip.getPrice().toString()+"€");
                 startdate_textview_detail.setText(Util.dateFormatSpanish(trip.getStartDate()));
                 enddate_textview_detail.setText(Util.dateFormatSpanish(trip.getEndDate()));

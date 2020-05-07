@@ -1,11 +1,11 @@
 
-|
-java:S1450"ZRemove the "tripAdapter" field and declare it as a local variable in the relevant methods.(ôİ»×ıÿÿÿÿ8ÇŒ‹×•.
-}
-java:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ıÿÿÿÿ8ö³ğÖ•.
-y
-java:S1450"\Remove the "selectedTrips" field and declare it as a local variable in the relevant methods.(Î¿µî8ÿóÈ¾š.
 }
 java:S1450"`Remove the "gridLayoutManager" field and declare it as a local variable in the relevant methods.(†ºŸã8°…œ×•.
+}
+java:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ıÿÿÿÿ8ö³ğÖ•.
 Œ
 java:S1450"jRemove the "textViewNumberTripsSelected" field and declare it as a local variable in the relevant methods.(“‘ºóùÿÿÿÿ8·…¿š.
+y
+java:S1450"\Remove the "selectedTrips" field and declare it as a local variable in the relevant methods.(Î¿µî8ÿóÈ¾š.
+|
+java:S1450"ZRemove the "tripAdapter" field and declare it as a local variable in the relevant methods.(ôİ»×ıÿÿÿÿ8ÇŒ‹×•.

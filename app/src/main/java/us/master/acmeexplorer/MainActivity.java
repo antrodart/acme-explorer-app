@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
         greetingsTextView.setText(greetingsMessage);
 
-        LinkAdapter linkAdapter = new LinkAdapter(this, Link.generateLinks());
+        LinkAdapter linkAdapter = new LinkAdapter(this, Link.generateLinks(user));
         listView.setAdapter(linkAdapter);
 
         showProfileButton.setOnClickListener(v -> redirectUserProfileActivity());
