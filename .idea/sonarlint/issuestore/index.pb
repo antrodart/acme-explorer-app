@@ -58,8 +58,6 @@ a
 1app/src/main/res/drawable/ic_person_blue_18dp.xml,d/b/dbdfae7a10a6073b282ec6ea5841c8dc2b5d6f30
 `
 0app/src/main/res/drawable/ic_save_white_24dp.xml,b/0/b0ef2e57b58f6ef699ca3b830dd12bc0a5ff2885
-`
-0app/src/main/res/layout/activity_user_detail.xml,6/8/687b7e2d7114f0e61246b2f33e2be39f23dc07f7
 R
 "app/src/main/res/values/colors.xml,9/6/969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
 n
@@ -76,7 +74,5 @@ e
 5app/src/main/res/layout/activity_my_created_trips.xml,1/c/1cef69f5495a68ad75bef0142a8890f5d21ebfe3
 b
 2app/src/main/res/layout/activity_selected_trip.xml,9/e/9ecd1e38e118ed8ff0bbc994ca822e37c98351d1
-S
-#app/src/main/res/values/strings.xml,d/2/d2281fbb3027de2722081a53408dd77628bf080e
 w
 Gapp/src/main/java/us/master/acmeexplorer/entity/SerializableString.java,3/e/3e7620058e85b01caff378e588e3bafca0fabb03

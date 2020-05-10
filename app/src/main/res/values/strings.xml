@@ -35,7 +35,7 @@
     <string name="user_detail_city_desc">Ciudad:</string>
     <string name="user_detail_birthdate_desc">Fecha de nacimiento:</string>
     <string name="user_detail_email_desc">Email:</string>
-    <string name="Edit_user_button">Editar perfil</string>
+    <string name="Edit_user_button">Editar datos del perfil</string>
     <string name="error_load_user_profile">No se ha podido cargar la información del usuario, disculpe las molestias.</string>
     <string name="my_profile">Mi perfil</string>
     <string name="user_edit_name_hint">Nombre</string>
@@ -66,4 +66,10 @@
     <string name="trip_create_price_error">El precio no es válido</string>
     <string name="trip_create_dates_error">La fecha de salida no puede ser posterior a la de llegada</string>
     <string name="trip_create_dates_error_2">La salida no puede ser una fecha pasada</string>
+    <string name="user_detail_change_picture">Cambiar foto</string>
+    <string name="take_picture_camera_rationale">Necesitamos acceder a tu cámara</string>
+    <string name="take_picture_camera_rationale_ok">Permitir</string>
+    <string name="camera_not_granted">No es posible usar esta función sin la cámara</string>
+    <string name="save_picture_external_storage">Necesitamos acceder al almacenamiento del dispositivo para guardar la foto</string>
+    <string name="storage_not_granted">No se puede almacenar la foto</string>
 </resources>

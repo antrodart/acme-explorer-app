@@ -33,6 +33,12 @@
             android:gravity="center"
             app:srcCompat="@drawable/default_user_pic" />
 
+        <Button
+            android:id="@+id/user_detail_change_picture_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_detail_change_picture" />
+
         <TextView
             android:id="@+id/user_detail_name"
             android:layout_width="match_parent"

@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="us.master.acmeexplorer">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TripCreateActivity"></activity>
+        <activity android:name=".FirebaseStorageActivity"></activity>
+        <activity android:name=".TripCreateActivity" />
         <activity android:name=".MyCreatedTripsActivity" />
         <activity android:name=".UserEditActivity" />
         <activity android:name=".UserDetailActivity" />
