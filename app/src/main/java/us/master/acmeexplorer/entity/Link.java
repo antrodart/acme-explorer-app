@@ -48,8 +48,8 @@ public class Link {
     public static List<Link> generateLinks(User userExtra) {
         List<Link> links = new ArrayList<>();
 
-        links.add(new Link("Viajes disponibles", R.drawable.take_a_trip, TripActivity.class, null));
-        links.add(new Link("Viajes seleccionados", R.drawable.next_trip, SelectedTripActivity.class, null));
+        links.add(new Link("Viajes disponibles", R.drawable.take_a_trip, TripActivity.class, userExtra));
+        links.add(new Link("Viajes seleccionados", R.drawable.next_trip, SelectedTripActivity.class, userExtra));
         links.add(new Link("Mis viajes creados", R.drawable.brujula, MyCreatedTripsActivity.class, userExtra));
 
         return links;

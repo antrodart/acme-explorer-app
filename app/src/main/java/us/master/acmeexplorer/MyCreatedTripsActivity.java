@@ -19,6 +19,7 @@ import java.util.List;
 
 import us.master.acmeexplorer.adapter.TripAdapter;
 import us.master.acmeexplorer.dto.TripDTO;
+import us.master.acmeexplorer.dto.UserDTO;
 import us.master.acmeexplorer.entity.Trip;
 import us.master.acmeexplorer.entity.User;
 
@@ -39,9 +40,33 @@ public class MyCreatedTripsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView_created_trips);
         createNewTripButton = findViewById(R.id.create_trip_button);
+        FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
 
         user = getIntent().getParcelableExtra(MainActivity.USER_PRINCIPAL);
+        firebaseDatabaseService.getUser(user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    UserDTO userDTO = dataSnapshot.getValue(UserDTO.class);
+                    if (userDTO != null) {
+                        user = new User(userDTO);
+                        getTripsCreated();
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("The read failed: ", databaseError.getMessage());
+            }
+        });
+
+
+        createNewTripButton.setOnClickListener(v -> redirectCreateNewTrip());
+
+    }
+
+    private void getTripsCreated() {
         FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
 
         firebaseDatabaseService.getTripsFromCreator(user.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -52,10 +77,11 @@ public class MyCreatedTripsActivity extends AppCompatActivity {
                         TripDTO tripDTO = tripDS.getValue(TripDTO.class);
                         if (tripDTO != null) {
                             Trip trip = new Trip(tripDTO);
+                            trip.setSelected(user.getSelectedTrips().containsValue(trip.getId()));
                             myCreatedTrips.add(trip);
                         }
                     }
-                    tripAdapter = new TripAdapter(myCreatedTrips, MyCreatedTripsActivity.this, false);
+                    tripAdapter = new TripAdapter(myCreatedTrips, MyCreatedTripsActivity.this, false, user);
                     gridLayoutManager = new GridLayoutManager(MyCreatedTripsActivity.this, 1);
                     recyclerView.setLayoutManager(gridLayoutManager);
                     recyclerView.setAdapter(tripAdapter);
@@ -67,9 +93,6 @@ public class MyCreatedTripsActivity extends AppCompatActivity {
                 Log.e("The read failed: ", databaseError.getMessage());
             }
         });
-
-        createNewTripButton.setOnClickListener(v -> redirectCreateNewTrip());
-
     }
 
     private void redirectCreateNewTrip() {
@@ -83,10 +106,10 @@ public class MyCreatedTripsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
-                Trip newTrip = (Trip) data.getSerializableExtra("NewTrip");
+                Trip newTrip = data.getParcelableExtra("NewTrip");
                 if (newTrip != null) {
                     myCreatedTrips.add(newTrip);
-                    tripAdapter = new TripAdapter(myCreatedTrips, this, false);
+                    tripAdapter = new TripAdapter(myCreatedTrips, this, false, user);
                     recyclerView.swapAdapter(tripAdapter, false);
                 }
             }

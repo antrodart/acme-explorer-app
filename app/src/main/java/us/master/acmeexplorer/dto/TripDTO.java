@@ -7,7 +7,7 @@ import us.master.acmeexplorer.entity.Trip;
 
 public class TripDTO {
 
-    private Long id;
+    private String id;
     private String startPlace;
     private String endPlace;
     private String description;
@@ -37,11 +37,11 @@ public class TripDTO {
 
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

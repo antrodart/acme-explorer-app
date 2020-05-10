@@ -1,5 +1,6 @@
 package us.master.acmeexplorer;
 
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,7 +23,7 @@ public class FirebaseDatabaseService {
         if (service == null || mDatabase == null) {
             service = new FirebaseDatabaseService();
             mDatabase = FirebaseDatabase.getInstance();
-            mDatabase.setPersistenceEnabled(true); // Permite almacenar datos en local si se pierde la conexión, y luego se sincronizan
+            mDatabase.setPersistenceEnabled(false); // Permite almacenar datos en local si se pierde la conexión, y luego se sincronizan
         }
 
         if(userId == null || userId.isEmpty()) {
@@ -32,20 +33,16 @@ public class FirebaseDatabaseService {
     }
 
     public DatabaseReference getTrip(String tripId) {
-        return mDatabase.getReference("user/u123/trip/" + tripId).getRef();
-    }
-
-    public DatabaseReference getTripPrice(String tripId) {
-        return mDatabase.getReference("user/u123/trip/" + tripId + "/price").getRef();
-    }
-
-    public DatabaseReference getTrip() {
-        return mDatabase.getReference("user/u123/trip").getRef();
+        return mDatabase.getReference("trips/" + tripId).getRef();
     }
 
     public void saveTrip(Trip trip, DatabaseReference.CompletionListener completionListener) {
         TripDTO tripDTO = new TripDTO(trip);
-        mDatabase.getReference("trips").push().setValue(tripDTO, completionListener);
+        String tripId = mDatabase.getReference("trips").push().getKey();
+        trip.setId(tripId);
+        tripDTO.setId(tripId);
+
+        mDatabase.getReference("trips").child(tripId).setValue(tripDTO, completionListener);
     }
 
     public void saveUser(User user, DatabaseReference.CompletionListener completionListener) {
@@ -57,8 +54,32 @@ public class FirebaseDatabaseService {
         return mDatabase.getReference("user/" + userId).getRef();
     }
 
+    public DatabaseReference getAllTrips() {
+        return mDatabase.getReference("trips").getRef();
+    }
+
     public DatabaseReference getTripsFromCreator(String creatorId) {
         return mDatabase.getReference("trips").orderByChild("creator").equalTo(creatorId).getRef();
+    }
+
+    /**
+     * Devuelve un conjunto de identificadores de Viajes que el usuario ha seleccionado dentro de
+     * la aplicación. Para obtener los objetos Trip en sí, es necesario iterar el conjunto que devuelve
+     * y obtener el trip a partir del identificador en cuestión.
+     *
+     * @param userId
+     * @return List<String> Lista o conjunto de identificadores de trips.
+     */
+    public DatabaseReference getSelectedTripsFromUser(String userId) {
+        return mDatabase.getReference("user/" + userId + "/selectedTrips").getRef();
+    }
+
+    public void setTripAsSelected(String userId, String tripId, DatabaseReference.CompletionListener completionListener) {
+        mDatabase.getReference("user/" + userId + "/selectedTrips").child(tripId).setValue(tripId, completionListener);
+    }
+
+    public void setTripAsNotSelected(String userId, String tripId, DatabaseReference.CompletionListener completionListener) {
+        mDatabase.getReference("user/" + userId + "/selectedTrips").child(tripId).removeValue(completionListener);
     }
 
 }

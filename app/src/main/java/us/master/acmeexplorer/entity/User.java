@@ -1,11 +1,15 @@
 package us.master.acmeexplorer.entity;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 import us.master.acmeexplorer.dto.UserDTO;
@@ -18,6 +22,7 @@ public class User implements Parcelable {
     private String city;
     private Calendar birthDate;
     private String picture;
+    private Map<String, String> selectedTrips = new HashMap<>();
 
     public User(UserDTO userDTO) {
         this.id = userDTO.getId();
@@ -32,6 +37,7 @@ public class User implements Parcelable {
             birthDateDTO.set(Integer.parseInt(birthDateDTOArray[0]),Integer.parseInt(birthDateDTOArray[1]),Integer.parseInt(birthDateDTOArray[2]));
             this.birthDate = birthDateDTO;
         }
+        this.selectedTrips = userDTO.getSelectedTrips();
     }
 
     public User(FirebaseUser firebaseUser) {
@@ -99,10 +105,48 @@ public class User implements Parcelable {
         this.picture = picture;
     }
 
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private User(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        surname = in.readString();
+        email = in.readString();
+        city = in.readString();
+        long birthdateMiliseconds = in.readLong();
+        String birthdateTimezone = in.readString();
+        picture = in.readString();
+        readMapFromBundle(in, selectedTrips, selectedTrips.getClass().getClassLoader());
+
+
+        if (birthdateMiliseconds != 1L) {
+            birthDate = new GregorianCalendar(TimeZone.getTimeZone(birthdateTimezone));
+            birthDate.setTimeInMillis(birthdateMiliseconds);
+        }
+    }
+
+    public Map<String, String> getSelectedTrips() {
+        return selectedTrips;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
+
+    public void setSelectedTrips(Map<String, String> selectedTrips) {
+        this.selectedTrips = selectedTrips;
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     // write your object's data to the passed-in Parcel
     @Override
@@ -120,32 +164,24 @@ public class User implements Parcelable {
             out.writeString(birthDate.getTimeZone().getID());
         }
         out.writeString(picture);
+        writeMapAsBundle(out, selectedTrips);
     }
 
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        public User createFromParcel(Parcel in) {
-            return new User(in);
+    private void writeMapAsBundle(Parcel dest, Map<String, String> map) {
+        Bundle bundle = new Bundle();
+        if (map != null) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                bundle.putSerializable(entry.getKey(), entry.getValue());
+            }
         }
+        dest.writeBundle(bundle);
+    }
 
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    // example constructor that takes a Parcel and gives you an object populated with it's values
-    private User(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        surname = in.readString();
-        email = in.readString();
-        city = in.readString();
-        long birthdateMiliseconds = in.readLong();
-        String birthdateTimezone = in.readString();
-        picture = in.readString();
-        if (birthdateMiliseconds != 1L) {
-            birthDate = new GregorianCalendar(TimeZone.getTimeZone(birthdateTimezone));
-            birthDate.setTimeInMillis(birthdateMiliseconds);
+    private void readMapFromBundle(Parcel in, Map<String, String> map, ClassLoader keyClassLoader) {
+        Bundle bundle = in.readBundle(keyClassLoader);
+        for (String key : bundle.keySet()) {
+            map.put(key, bundle.getString(key));
         }
     }
+
 }

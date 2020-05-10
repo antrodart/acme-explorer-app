@@ -1,13 +1,13 @@
 
-‚
-java:S1450"`Remove the "greetingsTextView" field and declare it as a local variable in the relevant methods.(Ğ‰Â‘ÿÿÿÿÿ8ÖÚ‰Ïœ.
 v
 java:S3008"YRename this field "USER_PRINCIPAL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óñÛ‰8×ƒŒÏœ.
+‚
+java:S1450"`Remove the "greetingsTextView" field and declare it as a local variable in the relevant methods.(Ğ‰Â‘ÿÿÿÿÿ8ÖÚ‰Ïœ.
 w
 java:S1104"ZMake USER_PRINCIPAL a static final constant or non-public and provide accessors if needed.(óñÛ‰8×ƒŒÏœ.
-Q
-java:S1444"4Make this "public static USER_PRINCIPAL" field final(óñÛ‰8×ƒŒÏœ.
 y
 java:S1450"WRemove the "listView" field and declare it as a local variable in the relevant methods.(¯¤½ñûÿÿÿÿ8Ûø„·œ.
+Q
+java:S1444"4Make this "public static USER_PRINCIPAL" field final(óñÛ‰8×ƒŒÏœ.
 ‚
 java:S1450"`Remove the "showProfileButton" field and declare it as a local variable in the relevant methods.(òí—şÿÿÿÿ8šôÁÓœ.

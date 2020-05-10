@@ -1,18 +1,27 @@
 package us.master.acmeexplorer.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import us.master.acmeexplorer.Constants;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Objects;
+import java.util.TimeZone;
+
 import us.master.acmeexplorer.dto.TripDTO;
 
-public class Trip implements Serializable {
+public class Trip implements Parcelable {
 
-    private Long id;
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Trip> CREATOR = new Parcelable.Creator<Trip>() {
+        public Trip createFromParcel(Parcel in) {
+            return new Trip(in);
+        }
+
+        public Trip[] newArray(int size) {
+            return new Trip[size];
+        }
+    };
     private String startPlace;
     private String endPlace;
     private String description;
@@ -26,19 +35,7 @@ public class Trip implements Serializable {
     public Trip() {
     }
 
-    public Trip(Long id, String startPlace, String endPlace, String description, String url,
-                Calendar startDate, Calendar endDate, Long price, User creator) {
-        this.id = id;
-        this.startPlace = startPlace;
-        this.endPlace = endPlace;
-        this.description = description;
-        this.url = url;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.price = price;
-        this.selected = false;
-        this.creator = creator;
-    }
+    private String id;
 
     public Trip (TripDTO tripDTO) {
         this.id = tripDTO.getId();
@@ -58,12 +55,41 @@ public class Trip implements Serializable {
         this.endDate = endDateDTO;
         }
 
-    public Long getId() {
-        return id;
+    public Trip(String id, String startPlace, String endPlace, String description, String url,
+                Calendar startDate, Calendar endDate, Long price, User creator) {
+        this.id = id;
+        this.startPlace = startPlace;
+        this.endPlace = endPlace;
+        this.description = description;
+        this.url = url;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+        this.selected = false;
+        this.creator = creator;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // example constructor that takes a Parcel and gives you an object populated with it's values
+    private Trip(Parcel in) {
+        id = in.readString();
+        startPlace = in.readString();
+        endPlace = in.readString();
+        description = in.readString();
+        url = in.readString();
+        long startDateMiliseconds = in.readLong();
+        String startDateTimeZone = in.readString();
+        long endDateMiliseconds = in.readLong();
+        String endDateTimeZone = in.readString();
+        price = in.readLong();
+        creator = in.readParcelable(User.class.getClassLoader());
+        if (startDateMiliseconds != 1L) {
+            startDate = new GregorianCalendar(TimeZone.getTimeZone(startDateTimeZone));
+            startDate.setTimeInMillis(startDateMiliseconds);
+        }
+        if (endDateMiliseconds != 1L) {
+            endDate = new GregorianCalendar(TimeZone.getTimeZone(endDateTimeZone));
+            endDate.setTimeInMillis(endDateMiliseconds);
+        }
     }
 
     public String getStartPlace() {
@@ -72,39 +98,6 @@ public class Trip implements Serializable {
 
     public void setStartPlace(String startPlace) {
         this.startPlace = startPlace;
-    }
-
-    public static List<Trip> generateTrips(int max) {
-        ArrayList<Trip> trips = new ArrayList<>(max);
-        Random r = new Random();
-
-        for (int i = 0; i < max; i++) {
-            // Se crean los índices aleatorios de las listas de ciudades
-            int cityIndex = r.nextInt(Constants.ciudades.length);
-            int startCityIndex = r.nextInt(Constants.lugarSalida.length);
-            // La fecha final será igual a la inicial más un número aleatorio de días, hasta 14.
-            int randomMonth = r.nextInt(9) + 4;
-            int randomDaysOfMonth = r.nextInt(30) + 1;
-            int randomPlusDays = r.nextInt(14);
-            Calendar startDateRandom = Calendar.getInstance();
-            Calendar endDateRandom = Calendar.getInstance();
-
-            startDateRandom.set(2020, randomMonth, randomDaysOfMonth);
-            endDateRandom.set(2020, randomMonth, randomDaysOfMonth);
-            endDateRandom.add(Calendar.DATE, randomPlusDays);
-
-            trips.add(new Trip((long) (i + 1),
-                    Constants.lugarSalida[startCityIndex],
-                    Constants.ciudades[cityIndex],
-                    Constants.adjetivo[r.nextInt(Constants.adjetivo.length)] + " viaje a "
-                            + Constants.ciudades[cityIndex] + " desde " + Constants.lugarSalida[startCityIndex],
-                    Constants.urlImagenes[r.nextInt(Constants.urlImagenes.length)],
-                    startDateRandom,
-                    endDateRandom,
-                    (long) (r.nextInt(850) + 150), null));
-        }
-
-        return trips;
     }
 
     public String getEndPlace() {
@@ -205,5 +198,44 @@ public class Trip implements Serializable {
                 ", price=" + price +
                 ", selected=" + selected +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // write your object's data to the passed-in Parcel
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(id);
+        out.writeString(startPlace);
+        out.writeString(endPlace);
+        out.writeString(description);
+        out.writeString(url);
+        if (startDate == null) {
+            out.writeLong(1L);
+            out.writeString("");
+        } else {
+            out.writeLong(startDate.getTimeInMillis());
+            out.writeString(startDate.getTimeZone().getID());
+        }
+        if (endDate == null) {
+            out.writeLong(1L);
+            out.writeString("");
+        } else {
+            out.writeLong(endDate.getTimeInMillis());
+            out.writeString(endDate.getTimeZone().getID());
+        }
+        out.writeLong(price);
+        out.writeParcelable(creator, flags);
     }
 }

@@ -22,17 +22,20 @@ import us.master.acmeexplorer.R;
 import us.master.acmeexplorer.TripDetailActivity;
 import us.master.acmeexplorer.Util;
 import us.master.acmeexplorer.entity.Trip;
+import us.master.acmeexplorer.entity.User;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder> {
 
     private List<Trip> nTrips;
     private Context context;
     private boolean showSelectSwitch;
+    private User userPrincipal;
 
-    public TripAdapter(List<Trip> nTrips,  Context context, boolean showSelectSwitch) {
+    public TripAdapter(List<Trip> nTrips, Context context, boolean showSelectSwitch, User userPrincipal) {
         this.nTrips = nTrips;
         this.context = context;
         this.showSelectSwitch = showSelectSwitch;
+        this.userPrincipal = userPrincipal;
     }
 
     @NonNull
@@ -74,13 +77,12 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.TripViewHolder
                 Intent intent = new Intent(context, TripDetailActivity.class);
                 intent.putExtra(Constants.IntentViaje, trip);
                 intent.putExtra("showSelectSwitch", showSelectSwitch);
+                intent.putExtra(Constants.USER_PRINCIPAL, userPrincipal);
+                intent.putExtra("selected", trip.isSelected());
                 ((Activity) context).startActivityForResult(intent, 1);
             }
         });
-
     }
-
-
 
     @Override
     public int getItemCount() {

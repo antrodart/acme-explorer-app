@@ -1,7 +1,8 @@
 package us.master.acmeexplorer.dto;
 
 import java.util.Calendar;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 import us.master.acmeexplorer.entity.User;
 
@@ -14,6 +15,7 @@ public class UserDTO {
     private String city;
     private String birthDate;
     private String picture;
+    private Map<String, String> selectedTrips = new HashMap<>();
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -23,8 +25,9 @@ public class UserDTO {
         this.city = user.getCity();
         this.picture = user.getPicture();
         if(user.getBirthDate() != null) {
-            this.birthDate = user.getBirthDate().get(Calendar.YEAR) + "-" + user.getBirthDate().get(Calendar.MONTH) + "-" + user.getBirthDate().get(Calendar.DAY_OF_MONTH);
+            this.birthDate = user.getBirthDate().get(Calendar.YEAR) + "-" + (user.getBirthDate().get(Calendar.MONTH) + 1) + "-" + user.getBirthDate().get(Calendar.DAY_OF_MONTH);
         }
+        this.selectedTrips = user.getSelectedTrips();
     }
 
     public  UserDTO() {
@@ -87,4 +90,11 @@ public class UserDTO {
         this.picture = picture;
     }
 
+    public Map<String, String> getSelectedTrips() {
+        return selectedTrips;
+    }
+
+    public void setSelectedTrips(Map<String, String> selectedTrips) {
+        this.selectedTrips = selectedTrips;
+    }
 }

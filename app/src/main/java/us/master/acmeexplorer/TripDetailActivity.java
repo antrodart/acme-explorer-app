@@ -3,6 +3,7 @@ package us.master.acmeexplorer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 
 import us.master.acmeexplorer.entity.Trip;
+import us.master.acmeexplorer.entity.User;
 
 public class TripDetailActivity extends AppCompatActivity  {
 
@@ -30,8 +32,10 @@ public class TripDetailActivity extends AppCompatActivity  {
     private TextView exit_place_textview_detail;
     private Switch selected_trip_switch;
     private boolean showSelectSwitch;
+    private Boolean selected;
     private Button buyButton;
     private static Context context;
+    private User userPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +54,17 @@ public class TripDetailActivity extends AppCompatActivity  {
         selected_trip_switch = findViewById(R.id.selected_trip_switch);
         buyButton = findViewById(R.id.buy_button);
 
+        FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
+
         try{
             showSelectSwitch = getIntent().getBooleanExtra("showSelectSwitch",true);
-            trip = (Trip) getIntent().getSerializableExtra(Constants.IntentViaje);
+            trip = getIntent().getParcelableExtra(Constants.IntentViaje);
+            userPrincipal = getIntent().getParcelableExtra(Constants.USER_PRINCIPAL);
+            selected = getIntent().getBooleanExtra("selected", false);
             if(trip != null) {
 
                 if (showSelectSwitch){
-                    selected_trip_switch.setChecked(trip.isSelected());
+                    selected_trip_switch.setChecked(selected);
                     buyButton.setVisibility(View.GONE);
                 }else {
                     selected_trip_switch.setVisibility(View.GONE);
@@ -80,8 +88,26 @@ public class TripDetailActivity extends AppCompatActivity  {
             selected_trip_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    trip.setSelected(isChecked);
-                    Constants.TRIPS.get((trip.getId()).intValue()-1).setSelected(isChecked);
+                    if (isChecked) {
+                        firebaseDatabaseService.setTripAsSelected(userPrincipal.getId(), trip.getId(), (databaseError, databaseReference) -> {
+                            if (databaseError == null) {
+                                userPrincipal.getSelectedTrips().put(trip.getId(), trip.getId());
+                                Log.i("AcmeExplorer", "El viaje se ha establecido como seleccionado satisfactoriamente");
+                            } else {
+                                Log.i("AcmeExplorer", "Ha habido un error al establecer el trip como seleccionado: " + databaseError.getMessage());
+                            }
+                        });
+                    } else {
+                        firebaseDatabaseService.setTripAsNotSelected(userPrincipal.getId(), trip.getId(), (databaseError, databaseReference) -> {
+                            if (databaseError == null) {
+                                userPrincipal.getSelectedTrips().remove(trip.getId());
+                                Log.i("AcmeExplorer", "El viaje se ha quitado como seleccionado satisfactoriamente");
+                            } else {
+                                Log.i("AcmeExplorer", "Ha habido un error al quitar el trip como seleccionado: " + databaseError.getMessage());
+                            }
+                        });
+
+                    }
                 }
             });
 
@@ -102,8 +128,7 @@ public class TripDetailActivity extends AppCompatActivity  {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("TripId",trip.getId());
-        intent.putExtra("TripSelected", trip.isSelected());
+        intent.putExtra(Constants.USER_PRINCIPAL, userPrincipal);
         setResult(RESULT_OK, intent);
         finish();
     }

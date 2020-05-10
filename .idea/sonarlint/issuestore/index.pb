@@ -70,3 +70,13 @@ t
 Dapp/src/main/java/us/master/acmeexplorer/MyCreatedTripsActivity.java,c/6/c642823de67ce55305f19cc60c89da1689808327
 p
 @app/src/main/java/us/master/acmeexplorer/TripCreateActivity.java,d/d/dd19631da78458e357ab22bf05303255ba2f667f
+i
+9app/src/main/res/drawable/ic_flight_takeoff_blue_24dp.xml,a/c/ac5677247e9fdfcfa4d1b5913be32407940c6881
+e
+5app/src/main/res/layout/activity_my_created_trips.xml,1/c/1cef69f5495a68ad75bef0142a8890f5d21ebfe3
+b
+2app/src/main/res/layout/activity_selected_trip.xml,9/e/9ecd1e38e118ed8ff0bbc994ca822e37c98351d1
+S
+#app/src/main/res/values/strings.xml,d/2/d2281fbb3027de2722081a53408dd77628bf080e
+w
+Gapp/src/main/java/us/master/acmeexplorer/entity/SerializableString.java,3/e/3e7620058e85b01caff378e588e3bafca0fabb03

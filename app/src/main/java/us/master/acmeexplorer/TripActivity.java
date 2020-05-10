@@ -1,36 +1,44 @@
 package us.master.acmeexplorer;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.Toast;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import us.master.acmeexplorer.adapter.TripAdapter;
+import us.master.acmeexplorer.dto.TripDTO;
+import us.master.acmeexplorer.dto.UserDTO;
 import us.master.acmeexplorer.entity.Trip;
+import us.master.acmeexplorer.entity.User;
 
 public class TripActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Switch switchColumns;
-    private ImageView star;
     private TripAdapter tripAdapter;
     private GridLayoutManager gridLayoutManager;
     private SharedPreferences sharedPreferencesFilters;
-    List<Trip> trips;
-    List<Trip> filteredTrips;
+    List<Trip> trips = new ArrayList<>();
+    List<Trip> filteredTrips = new ArrayList<>();
+    private User userPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,31 +46,67 @@ public class TripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip);
         recyclerView = findViewById(R.id.recyclerView);
         switchColumns = findViewById(R.id.switch_columns);
-        //star = findViewById(R.id.image_star);
-
         // Recuperamos el filtro
         sharedPreferencesFilters = getSharedPreferences(Constants.filtroPreferences, MODE_PRIVATE);
+        FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
 
-        if(Constants.TRIPS == null){
-            Constants.TRIPS = Trip.generateTrips(20);
-        }
-        trips = Constants.TRIPS;
-        // Filtramos directamente aunque no sea lo más adecuado
-        filteredTrips = comprobacionFiltros(trips);
-        showResultToast(filteredTrips);
-
-        tripAdapter = new TripAdapter(filteredTrips, this, true);
-
-        switchColumns.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        userPrincipal = getIntent().getParcelableExtra(MainActivity.USER_PRINCIPAL);
+        firebaseDatabaseService.getUser(userPrincipal.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int spanCount = isChecked ? 2 : 1;
-                gridLayoutManager.setSpanCount(spanCount);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    UserDTO userDTO = dataSnapshot.getValue(UserDTO.class);
+                    if (userDTO != null) {
+                        userPrincipal = new User(userDTO);
+                        getTrips();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("The read failed: ", databaseError.getMessage());
             }
         });
-        gridLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(tripAdapter);
+    }
+
+    private void getTrips() {
+        FirebaseDatabaseService firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
+        firebaseDatabaseService.getAllTrips().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    trips.clear();
+                    for (DataSnapshot tripDS : dataSnapshot.getChildren()) {
+                        TripDTO tripDTO = tripDS.getValue(TripDTO.class);
+                        if (tripDTO != null) {
+                            Trip trip = new Trip(tripDTO);
+                            trip.setSelected(userPrincipal.getSelectedTrips().containsValue(trip.getId()));
+                            trips.add(trip);
+                        }
+                    }
+                    filteredTrips = comprobacionFiltros(trips);
+                    showResultToast(filteredTrips);
+
+                    tripAdapter = new TripAdapter(filteredTrips, TripActivity.this, true, userPrincipal);
+                    switchColumns.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            int spanCount = isChecked ? 2 : 1;
+                            gridLayoutManager.setSpanCount(spanCount);
+                        }
+                    });
+                    gridLayoutManager = new GridLayoutManager(TripActivity.this, 1);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    recyclerView.setAdapter(tripAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("The read failed: ", databaseError.getMessage());
+            }
+        });
     }
 
     @Override
@@ -70,21 +114,17 @@ public class TripActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                int idTrip = data.getIntExtra("TripId", 0);
-                boolean selectedTrip = data.getBooleanExtra("TripSelected", false);
-                if (idTrip != 0) {
-                    this.trips.get(idTrip - 1).setSelected(selectedTrip);
-                    this.filteredTrips.stream().filter(t -> t.getId() == idTrip).collect(Collectors.toList()).get(0).setSelected(selectedTrip);
-                    tripAdapter.notifyDataSetChanged();
-                }
+                userPrincipal = data.getParcelableExtra(Constants.USER_PRINCIPAL);
+                getTrips();
+                tripAdapter.notifyDataSetChanged();
             }
         } else if(requestCode == 2) {
-            if(resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 boolean newFilter = data.getBooleanExtra("NewFilter", false);
                 if(newFilter) {
                     filteredTrips = comprobacionFiltros(trips);
                     showResultToast(filteredTrips);
-                    tripAdapter = new TripAdapter(filteredTrips, this, true);
+                    tripAdapter = new TripAdapter(filteredTrips, this, true, userPrincipal);
                     recyclerView.swapAdapter(tripAdapter, false);
                 }
             }
@@ -136,7 +176,6 @@ public class TripActivity extends AppCompatActivity {
         Intent intent = new Intent(TripActivity.this, FilterTripActivity.class);
         intent.putExtra("NewFilter", false);
         startActivityForResult(intent, 2);
-        //startActivity(new Intent( TripActivity.this, FilterTripActivity.class));
     }
 
     private void showResultToast(List<Trip> filteredTrips) {
