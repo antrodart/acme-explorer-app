@@ -77,11 +77,6 @@ public class UserDetailActivity extends AppCompatActivity {
             }
 
             if (!Util.checkStringEmpty(user.getPicture())) {
-               /* Picasso.get()
-                        .load(user.getPicture())
-                        .placeholder(R.drawable.default_user_pic)
-                        .error(R.drawable.default_user_pic)
-                        .into(profilePhotoIV);*/
                 Glide.with(UserDetailActivity.this)
                         .load(user.getPicture())
                         .placeholder(R.drawable.default_user_pic)
@@ -163,12 +158,6 @@ public class UserDetailActivity extends AppCompatActivity {
                             firebaseDatabaseService.saveUser(user, ((databaseError, databaseReference) -> {
                                 if (databaseError == null) {
                                     Log.i("AcmeExplorer", "El usuario se ha actualizado correctamente: " + user.getId());
-                                    /*Picasso.get()
-                                            .load(user.getPicture())
-                                            .rotate(90)
-                                            .placeholder(R.drawable.default_user_pic)
-                                            .error(R.drawable.default_user_pic)
-                                            .into(profilePhotoIV);*/
                                     Glide.with(UserDetailActivity.this)
                                             .load(task1.getResult())
                                             .placeholder(R.drawable.default_user_pic)

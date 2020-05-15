@@ -72,4 +72,7 @@
     <string name="camera_not_granted">No es posible usar esta función sin la cámara</string>
     <string name="save_picture_external_storage">Necesitamos acceder al almacenamiento del dispositivo para guardar la foto</string>
     <string name="storage_not_granted">No se puede almacenar la foto</string>
+    <string name="location_rationale">Necesitamos tu localización para esta funcionalidad</string>
+    <string name="location_rationale_ok">Permitir</string>
+    <string name="location_cancel">Este permiso es importante para la aplicación</string>
 </resources>

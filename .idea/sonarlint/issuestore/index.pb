@@ -74,5 +74,7 @@ e
 5app/src/main/res/layout/activity_my_created_trips.xml,1/c/1cef69f5495a68ad75bef0142a8890f5d21ebfe3
 b
 2app/src/main/res/layout/activity_selected_trip.xml,9/e/9ecd1e38e118ed8ff0bbc994ca822e37c98351d1
-w
-Gapp/src/main/java/us/master/acmeexplorer/entity/SerializableString.java,3/e/3e7620058e85b01caff378e588e3bafca0fabb03
+n
+>app/src/main/java/us/master/acmeexplorer/LocationActivity.java,e/4/e4315a99a90ff20990d50cff33e4223da1307772
+i
+9app/src/main/java/us/master/acmeexplorer/MapActivity.java,3/5/35e92a370722f85a7fff1f639e294a3e4ccc6d00

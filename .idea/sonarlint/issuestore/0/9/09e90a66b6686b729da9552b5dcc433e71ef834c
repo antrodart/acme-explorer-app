@@ -1,13 +1,7 @@
 
-]	java:S125|"<This block of commented-out lines of code should be removed.(ù”ÃÒûÿÿÿÿ8†’ŞÊŸ.
-X	java:S1258"<This block of commented-out lines of code should be removed.(ğá½8Á‹ÏÈŸ.
-N
-java:S1172º"+Remove this unused method parameter "view".(Øï•Ÿøÿÿÿÿ8Şï‚–.
-X	java:S125¾"<This block of commented-out lines of code should be removed.(¼‰8¥†øœ–.
-J
-java:S1068$"(Remove this unused "star" private field.(ˆ€ñúıÿÿÿÿ8‡§Ù•.
-X	java:S1252"<This block of commented-out lines of code should be removed.(—Šö’8‡§Ù•.
 \
-java:S1155Â">Use isEmpty() to check whether the collection is empty or not.(Å³¨8›£µ –.
-R
-java:S1066…"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8£Ğúœ–.
+java:S1155¶">Use isEmpty() to check whether the collection is empty or not.(Å³¨8È„ïïŸ.
+N
+java:S1172¯"+Remove this unused method parameter "view".(Øï•Ÿøÿÿÿÿ8È„ïïŸ.
+Q
+java:S1066z"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8È„ïïŸ.

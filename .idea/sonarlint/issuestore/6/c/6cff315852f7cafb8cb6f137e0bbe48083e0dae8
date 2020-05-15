@@ -1,5 +1,2 @@
 
-X	java:S125R"<This block of commented-out lines of code should be removed.(îæÏœ8±ø³ÊŸ.
-]	java:S107""AConstructor has 9 parameters, which is greater than 7 authorized.(›ÒÍ†8Ô†å×•.
-S
-java:S1128"1Remove this unused import 'java.io.Serializable'.(èãîÂÿÿÿÿÿ8Ê“¯ÌŸ.
+]	java:S107:"AConstructor has 9 parameters, which is greater than 7 authorized.(›ÒÍ†8Ô†å×•.

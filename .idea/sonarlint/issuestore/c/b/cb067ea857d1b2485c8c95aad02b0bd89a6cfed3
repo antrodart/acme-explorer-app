@@ -1,9 +1,9 @@
 
-}
-java:S1450"`Remove the "gridLayoutManager" field and declare it as a local variable in the relevant methods.(†ºŸã8ÐÛ‡ÔŸ.
 |
 java:S1450"ZRemove the "tripAdapter" field and declare it as a local variable in the relevant methods.(ôÝ»×ýÿÿÿÿ8ÐÛ‡ÔŸ.
-o
-java:S3776+"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(ªæùÛ8âÂ‚ÓŸ.
 }
 java:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ýÿÿÿÿ8ÐÛ‡ÔŸ.
+o
+java:S3776+"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(ªæùÛ8âÂ‚ÓŸ.
+}
+java:S1450"`Remove the "gridLayoutManager" field and declare it as a local variable in the relevant methods.(†ºŸã8ÐÛ‡ÔŸ.
