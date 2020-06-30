@@ -22,6 +22,8 @@ public class User implements Parcelable {
     private String city;
     private Calendar birthDate;
     private String picture;
+    private Double latitude;
+    private Double longitude;
     private Map<String, String> selectedTrips = new HashMap<>();
 
     public User(UserDTO userDTO) {
@@ -38,6 +40,8 @@ public class User implements Parcelable {
             this.birthDate = birthDateDTO;
         }
         this.selectedTrips = userDTO.getSelectedTrips();
+        this.latitude = userDTO.getLatitude();
+        this.longitude = userDTO.getLongitude();
     }
 
     public User(FirebaseUser firebaseUser) {
@@ -47,6 +51,10 @@ public class User implements Parcelable {
         if(firebaseUser.getPhotoUrl() != null) {
             this.picture = firebaseUser.getPhotoUrl().toString();
         }
+    }
+
+    public User() {
+
     }
 
     public String getId() {
@@ -115,6 +123,8 @@ public class User implements Parcelable {
         long birthdateMiliseconds = in.readLong();
         String birthdateTimezone = in.readString();
         picture = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
         readMapFromBundle(in, selectedTrips, selectedTrips.getClass().getClassLoader());
 
 
@@ -122,6 +132,22 @@ public class User implements Parcelable {
             birthDate = new GregorianCalendar(TimeZone.getTimeZone(birthdateTimezone));
             birthDate.setTimeInMillis(birthdateMiliseconds);
         }
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Map<String, String> getSelectedTrips() {
@@ -164,6 +190,13 @@ public class User implements Parcelable {
             out.writeString(birthDate.getTimeZone().getID());
         }
         out.writeString(picture);
+        if (latitude == null || longitude == null) {
+            out.writeDouble(37);
+            out.writeDouble(-6);
+        } else {
+            out.writeDouble(latitude);
+            out.writeDouble(longitude);
+        }
         writeMapAsBundle(out, selectedTrips);
     }
 
@@ -183,5 +216,6 @@ public class User implements Parcelable {
             map.put(key, bundle.getString(key));
         }
     }
+
 
 }

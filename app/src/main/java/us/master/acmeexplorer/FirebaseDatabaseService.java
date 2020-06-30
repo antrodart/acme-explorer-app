@@ -82,4 +82,8 @@ public class FirebaseDatabaseService {
         mDatabase.getReference("user/" + userId + "/selectedTrips").child(tripId).removeValue(completionListener);
     }
 
+    public DatabaseReference getAllUsers() {
+        return mDatabase.getReference("user").getRef();
+    }
+
 }

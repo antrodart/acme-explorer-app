@@ -15,6 +15,8 @@ public class UserDTO {
     private String city;
     private String birthDate;
     private String picture;
+    private Double latitude;
+    private Double longitude;
     private Map<String, String> selectedTrips = new HashMap<>();
 
     public UserDTO(User user) {
@@ -28,6 +30,8 @@ public class UserDTO {
             this.birthDate = user.getBirthDate().get(Calendar.YEAR) + "-" + (user.getBirthDate().get(Calendar.MONTH) + 1) + "-" + user.getBirthDate().get(Calendar.DAY_OF_MONTH);
         }
         this.selectedTrips = user.getSelectedTrips();
+        this.latitude = user.getLatitude();
+        this.longitude = user.getLongitude();
     }
 
     public  UserDTO() {
@@ -96,5 +100,21 @@ public class UserDTO {
 
     public void setSelectedTrips(Map<String, String> selectedTrips) {
         this.selectedTrips = selectedTrips;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

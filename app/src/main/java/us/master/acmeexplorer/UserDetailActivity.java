@@ -44,6 +44,7 @@ public class UserDetailActivity extends AppCompatActivity {
     private TextView cityTV;
     private TextView birthDateTV;
     private Button editProfileButton;
+    private Button viewCloseUsersButton;
     private static final int CAMERA_PERMISSION_REQUEST = 0x512;
     private User user;
     private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST = 0x513;
@@ -64,6 +65,7 @@ public class UserDetailActivity extends AppCompatActivity {
         birthDateTV = findViewById(R.id.user_detail_birthdate);
         editProfileButton = findViewById(R.id.user_detail_edit_button);
         takePictureButton = findViewById(R.id.user_detail_change_picture_button);
+        viewCloseUsersButton = findViewById(R.id.user_detail_usuarios_cerca);
 
         user = getIntent().getParcelableExtra(USER_PRINCIPAL);
 
@@ -91,6 +93,8 @@ public class UserDetailActivity extends AppCompatActivity {
         }
 
         takePictureButton.setOnClickListener(l -> takePicture());
+
+        viewCloseUsersButton.setOnClickListener(b -> redirectCloseUser());
 
     }
 
@@ -197,6 +201,12 @@ public class UserDetailActivity extends AppCompatActivity {
 
     private void redirectEditUserProfile() {
         Intent intent = new Intent(this, UserEditActivity.class);
+        intent.putExtra(USER_PRINCIPAL, user);
+        startActivity(intent);
+    }
+
+    private void redirectCloseUser() {
+        Intent intent = new Intent(this, LocationActivity.class);
         intent.putExtra(USER_PRINCIPAL, user);
         startActivity(intent);
     }

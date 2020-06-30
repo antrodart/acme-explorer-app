@@ -75,4 +75,5 @@
     <string name="location_rationale">Necesitamos tu localización para esta funcionalidad</string>
     <string name="location_rationale_ok">Permitir</string>
     <string name="location_cancel">Este permiso es importante para la aplicación</string>
+    <string name="ver_usuarios_cerca">Ver usuarios próximos</string>
 </resources>
