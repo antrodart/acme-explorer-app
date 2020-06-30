@@ -76,5 +76,3 @@ n
 >app/src/main/java/us/master/acmeexplorer/LocationActivity.java,e/4/e4315a99a90ff20990d50cff33e4223da1307772
 i
 9app/src/main/java/us/master/acmeexplorer/MapActivity.java,3/5/35e92a370722f85a7fff1f639e294a3e4ccc6d00
-S
-#app/src/main/res/values/strings.xml,d/2/d2281fbb3027de2722081a53408dd77628bf080e

@@ -2,6 +2,8 @@ package us.master.acmeexplorer;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +30,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import us.master.acmeexplorer.dto.UserDTO;
 import us.master.acmeexplorer.entity.User;
+import us.master.acmeexplorer.resttype.WeatherResponse;
+import us.master.acmeexplorer.resttype.WeatherRetrofitInterface;
 
 public class LocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -42,6 +52,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     private User mostCloseUser = new User();
     private SupportMapFragment supportMapFragment;
     private TextView location;
+    private TextView weatherLocation;
+    private TextView locationAddress;
+    private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +62,13 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(R.layout.activity_location);
 
         location = findViewById(R.id.location);
+        weatherLocation = findViewById(R.id.weather_location);
+        locationAddress = findViewById(R.id.location_address);
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map);
         userPrincipal = getIntent().getParcelableExtra(USER_PRINCIPAL);
         firebaseDatabaseService = FirebaseDatabaseService.getSeriveInstance();
+
+        retrofit = new Retrofit.Builder().baseUrl("https://api.openweathermap.org/").addConverterFactory(GsonConverterFactory.create()).build();
 
         String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
         if (ContextCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED) {
@@ -149,11 +166,16 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         LatLng locationUserPrincipal = new LatLng(userPrincipal.getLatitude(), userPrincipal.getLongitude());
         googleMap.addMarker(new MarkerOptions().title("Mi posición").position(locationUserPrincipal));
+        float latitude;
+        float longitude;
 
         if (mostCloseUser.getLatitude() == null || mostCloseUser.getLongitude() == null) {
             // No existe usuario más cercano
             location.setText("No hay usuarios cercanos. Mostrando su posición.");
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationUserPrincipal, 8));
+            latitude = mostCloseUser.getLatitude().floatValue();
+            longitude = mostCloseUser.getLongitude().floatValue();
+
         } else {
             Location targetLocation = new Location("");
             Location userPrincipalLocation = new Location("");
@@ -162,13 +184,57 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             userPrincipalLocation.setLatitude(userPrincipal.getLatitude());
             userPrincipalLocation.setLongitude(userPrincipal.getLongitude());
             float distancia = targetLocation.distanceTo(userPrincipalLocation);
+            latitude = mostCloseUser.getLatitude().floatValue();
+            longitude = mostCloseUser.getLongitude().floatValue();
 
             LatLng locationTarget = new LatLng(mostCloseUser.getLatitude(), mostCloseUser.getLongitude());
             googleMap.addMarker(new MarkerOptions().title("Usuario más cercano: " + mostCloseUser.getName()).position(locationTarget));
             location.setText("El usuario más cercano es " + mostCloseUser.getName() + " " +
                     mostCloseUser.getSurname() + ". Se encuentra a una distancia de " + distancia + " metros.");
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTarget, 8));
+
         }
+
+        WeatherRetrofitInterface service = retrofit.create(WeatherRetrofitInterface.class);
+        Call<WeatherResponse> response = service.getCurrentWeather(latitude, longitude,
+                getString(R.string.open_weather_map_api_key), "metric");
+
+        response.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    WeatherResponse wr = response.body();
+                    String weatherLocationText = "La temperatura en " + wr.getName() + " es de " + wr.getMain().getTemp() + " ºC.";
+                    weatherLocation.setText(weatherLocationText);
+                    Log.i("AcmeExplorer", "La temperatura actual es " + wr.getMain().getTemp());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                Log.i("AcmeExplorer", "REST: error en la llamada. " + t.getMessage());
+            }
+        });
+
+        getAddress(latitude, longitude);
+
+    }
+
+    private void getAddress(float latitude, float longitude) {
+        try {
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(this, Locale.getDefault());
+
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+
+            locationAddress.setText("Se encuentra en la calle " + address);
+        } catch (Exception e) {
+            Log.e("AcmeExplorer", "Geocoder error: " + e.getMessage());
+        }
+
     }
 
 }
